@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import FlashCardList from './FlashCardList'
+
+import FlashCardList from './FlashCardList';
+
+import './app.css'
 
 
 function App() {
