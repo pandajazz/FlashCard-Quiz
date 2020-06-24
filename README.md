@@ -1,3 +1,24 @@
+# FlashCard Quiz
+
+Game built using React Hooks and Open Trivia DB API
+
+![Homepage](public/images/homepage.png)
+
+## Project Objectives
+
+Getting confident at using React Hooks. 
+
+The app includes two sections: 
+- Header: this is the section for randomly generate, according to a specific category, a maximum of ten questions/cards.
+- Container with Flashcards: displaying a list of all the flashcards.
+
+Each Flashcard includes a question with different options. Try to guess the right answer before flippin' the card!
+
+<hr/>
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
