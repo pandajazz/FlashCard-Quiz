@@ -8,7 +8,7 @@ import './app.css'
 
 function App() {
 
-  const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS)
+  const [flashcards, setFlashcards] = useState([])
   const [categories, setCategories] = useState([])
 
   const categoryEl = useRef()
@@ -22,9 +22,22 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
+
+  function decodeString(string) {
+    const textArea = document.createElement('textarea')
+    textArea.innerHTML = string
+    return textArea.value
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
     axios
-    .get('https://opentdb.com/api.php?amount=10')
+    .get('https://opentdb.com/api.php', {
+      params: {
+        amount: amountEl.current.value,
+        category: categoryEl.current.value
+      }
+    })
     .then(res => {
       setFlashcards(res.data.results.map((questionItem, index) => {
         const { correct_answer, incorrect_answers, question } = questionItem
@@ -42,17 +55,6 @@ function App() {
       }))
       console.log(res.data)
     })
-
-  }, [])
-
-  function decodeString(string) {
-    const textArea = document.createElement('textarea')
-    textArea.innerHTML = string
-    return textArea.value
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
 
   }
 
@@ -83,29 +85,4 @@ function App() {
   );
 }
 
-
-const SAMPLE_FLASHCARDS = [
-  {
-    id: 1,
-    question: 'What is 2 + 2?',
-    answer: '4',
-    options: [
-      '2',
-      '3',
-      '4',
-      '5'
-    ]
-  },
-  {
-    id: 2,
-    question: 'what is my name',
-    answer: 'Answer',
-    options: [
-      'Answer',
-      'Answer 1',
-      'Answer 2',
-      'Answer 3'
-    ]
-  }
-]
 export default App;
