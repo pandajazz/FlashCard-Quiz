@@ -15,14 +15,15 @@ function App() {
     .get('https://opentdb.com/api.php?amount=10')
     .then(res => {
       setFlashcards(res.data.results.map((questionItem, index) => {
-        const answer = decodeString(questionItem.correct_answer)
+        const { correct_answer, incorrect_answers, question } = questionItem
+        const answer = decodeString(correct_answer)
         const options = [
-          ...questionItem.incorrect_answers.map( a => decodeString(a)), 
+          ...incorrect_answers.map( a => decodeString(a)), 
           answer
         ]
         return {
           id: `${index}-${Date.now()}`,
-          questions: decodeString(questionItem.question),
+          question: decodeString(question),
           answer: answer,
           options: options.sort(() => Math.random() - .5)
         }
@@ -39,7 +40,9 @@ function App() {
   }
 
   return (
+    <div className="container">
     <FlashCardList flashcards={flashcards} />
+    </div>
   );
 }
 
